@@ -1,0 +1,42 @@
+<% layout('layout') -%>
+
+<div class="container">
+	<div class="col-lg-6">
+
+			<% if(message.length > 0) {%>
+				<div class="alert alert-success alert-dismissible">
+				<%= message%>
+				<button type="button" class="close" data-dismiss="alert" aria-label="close">
+					<span aria-hidden>&times</span>
+				</button>
+				</div>
+			<% } %>
+
+		
+		<% for(var i = 0; i < foundCart.items.length; i++) { %>
+
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-md-3">
+							<span><img class="product-image" src="<%= foundCart.items[i].item.image %>"></span>
+						</div>
+						<div class="col-md-6">
+						<p class="list-group-item-heading"><%= foundCart.items[i].item.name %></p>
+						</div>
+						<div class="col-md-3">
+						<p><%= foundCart.items[i].quantity %></p>
+						<p>R<%= foundCart.items[i].price %></p>
+
+						<form method="post" action="/remove">
+							<input type="hidden" name="ïtem" value="<%= foundCart.items[i]._id %>"/>
+							<input type="hidden" name="price" value="<%= foundCart.items[i].price %>"/>
+							<button type="submit">Remove</button>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% } %>
+	</div>
+</div>
